@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#SBATCH --job-name=channel
+#SBATCH --output=output
+#SBATCH --error=output.err
+#SBATCH --partition=cpu
+#SBATCH --nodes=1
+#SBATCH --exclusive
+
+module swap gnu8 intel
+
+mpirun -n 40 ../lblc
+../../postprocess/iso
+~/bin/active_nematics/cap_defect2d_flat4pattern

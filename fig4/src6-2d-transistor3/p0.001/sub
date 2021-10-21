@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#SBATCH --job-name=channel
+#SBATCH --output=output
+#SBATCH --error=output.err
+#SBATCH --partition=depablo-tc
+#SBATCH --qos=depablo-tc-sn
+#SBATCH --nodes=1
+#SBATCH --time=24:0:0
+#SBATCH --exclusive
+
+module unload openmpi
+module load intelmpi/5.0+intel-15.0
+
+mpirun -n 28 ../lblc
+../../postprocess/iso
+cap_defect2d_flat
